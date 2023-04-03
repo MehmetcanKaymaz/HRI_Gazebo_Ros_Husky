@@ -1,1 +1,1 @@
-# HRI_Gazebo_Ros_Husky
+# HRI Term Project 
