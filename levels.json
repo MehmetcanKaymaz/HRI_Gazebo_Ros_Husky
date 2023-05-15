@@ -1,0 +1,11 @@
+{
+    "min_dist" : 2,
+    "level1" : {
+        "disp_name" : "Level 1",
+        "file_name" : "level1",
+        "init_pose" : [0,0],
+        "final_pose" : [1,4],
+        "duration" : 20
+    }
+
+}

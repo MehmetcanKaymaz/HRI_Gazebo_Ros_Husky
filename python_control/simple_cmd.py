@@ -78,7 +78,7 @@ class SimpleControl:
         self.pub.publish(twist)
 
 
-sc=SimpleControl()
-sc.run_main()
+#sc=SimpleControl()
+#sc.run_main()
 
 
