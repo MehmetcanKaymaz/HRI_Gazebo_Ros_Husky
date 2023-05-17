@@ -27,7 +27,7 @@ class SimpleControl:
         self.run_rose=True
 
         # Load the pre-trained ResNet-18 model
-        self.model = torch.load('models/model5.pth')
+        self.model = torch.load('models/model_noise_5.pth')
 
         self.model.to('cpu')
 
@@ -51,44 +51,49 @@ class SimpleControl:
         self.t=threading.Thread(target=self.run_ros_node)
 
         self.t.start()
+
+    def single_update(self):
+        # Capture a frame from the webcam
+        ret, frame = self.cap.read()
+
+        # Apply the data transformations to the frame
+        img = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        
+        # Convert the NumPy array to a PIL Image
+        img = Image.fromarray(np.uint8(img))
+
+        # Apply the data transformations to the image
+        img = self.data_transforms(img).unsqueeze(0)
+
+
+        # Make a prediction with the model
+        with torch.no_grad():
+            output = self.model(img)
+
+        # Get the predicted class label
+        _, predicted = torch.max(output.data, 1)
+        label = predicted.item()
+
+        self.apply_control(label=label)
+
+        # Display the predicted class label on the frame
+        font = cv2.FONT_HERSHEY_SIMPLEX
+        org = (50, 50)
+        fontScale = 1
+        color = (255, 0, 0)
+        thickness = 2
+        cv2.putText(frame, 'Predicted Class: ' + str(label), org, font,
+                    fontScale, color, thickness, cv2.LINE_AA)
+
+        # Display the frame
+        cv2.imshow('frame', frame)
+
+
         
     def run_main(self):
         statu=True
         while statu:
-            # Capture a frame from the webcam
-            ret, frame = self.cap.read()
-
-            # Apply the data transformations to the frame
-            img = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-            
-            # Convert the NumPy array to a PIL Image
-            img = Image.fromarray(np.uint8(img))
-
-            # Apply the data transformations to the image
-            img = self.data_transforms(img).unsqueeze(0)
-
-
-            # Make a prediction with the model
-            with torch.no_grad():
-                output = self.model(img)
-
-            # Get the predicted class label
-            _, predicted = torch.max(output.data, 1)
-            label = predicted.item()
-
-            self.apply_control(label=label)
-
-            # Display the predicted class label on the frame
-            font = cv2.FONT_HERSHEY_SIMPLEX
-            org = (50, 50)
-            fontScale = 1
-            color = (255, 0, 0)
-            thickness = 2
-            cv2.putText(frame, 'Predicted Class: ' + str(label), org, font,
-                        fontScale, color, thickness, cv2.LINE_AA)
-
-            # Display the frame
-            cv2.imshow('frame', frame)
+            self.single_update()
 
             # Exit if the 'q' key is pressed
             if cv2.waitKey(1) & 0xFF == ord('q'):
@@ -106,14 +111,14 @@ class SimpleControl:
             self.rotz=0
         elif label==1:
             self.velx+=0.5
-            self.velx=min(self.velx,1.5)
+            self.velx=min(self.velx,1.)
         elif label==2:
             self.velx+=-0.5
-            self.velx=max(self.velx,-1.5)  
+            self.velx=max(self.velx,-1.)  
         elif label==3:
-            self.rotz=-1
+            self.rotz=-.5
         elif label==4:
-            self.rotz=1
+            self.rotz=.5
         else:
             print("Unknown label ",label)
 
@@ -134,7 +139,7 @@ class SimpleControl:
         self.pub.publish(twist)
 
 
-sc=SimpleControl()
-sc.run_main()
+#sc=SimpleControl()
+#sc.run_main()
 
 

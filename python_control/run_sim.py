@@ -1,11 +1,14 @@
 import numpy as np
 import json
-from simple_cmd import SimpleControl
+#from simple_cmd import SimpleControl
+from vision_cmd import SimpleControl
+import cv2
 import rospy
 from gazebo_msgs.msg import ModelStates
 from geometry_msgs.msg import Pose
 import threading
 import time
+from dance import HuskyDancer
 #################################################################################################################################################
 class LoadLevelParams:
     def __init__(self,json_file="levels.json",level=1):
@@ -84,7 +87,13 @@ class Sim:
         statu=True
         t1=time.time()
         while statu:
-            statu=self.control.apply_control()
+            #statu=self.control.apply_control()
+
+            self.control.single_update()
+
+            # Exit if the 'q' key is pressed
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
 
             dist_statu=self.check_pose()
             if dist_statu:
@@ -93,23 +102,29 @@ class Sim:
                 break
 
             t2=time.time()
-            print(t2-t1)
             if t2-t1>self.LevelParams.duration:
                 print("Time Over")
                 break
         
-        self.control.t.join()
-        self.position_reader.listener_thread.join()
+        #self.control.t.join()
+        #self.position_reader.listener_thread.join()
+        self.control.run_rose=False
+        #self.control.t.join()
 
+        # Release the webcam and close the window
+        self.control.cap.release()
+        cv2.destroyAllWindows()
+
+        if self.success:
+            dancer=HuskyDancer(x=self.LevelParams.final_pose[0],y=self.LevelParams.final_pose[1])
+            dancer.dance()
+        
 
 
 
     def check_pose(self):
         cur_pose=self.position_reader.get_pose()
         final_pose=self.LevelParams.final_pose
-
-        print(cur_pose)
-        print(final_pose)
 
         dist=np.sqrt(pow(cur_pose[0]-final_pose[0],2)+pow(cur_pose[1]-final_pose[1],2))
 
@@ -118,5 +133,5 @@ class Sim:
         else:
             return False
 
-sim=Sim()
-sim.loop()
+#sim=Sim(level=2)
+#sim.loop()

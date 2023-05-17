@@ -66,6 +66,7 @@ class SimpleControl:
         while self.run_rose:
             self.sent_ros_node()
     
+
     def sent_ros_node(self):
         twist=Twist()
         twist.linear.x = self.velx

@@ -5,7 +5,23 @@
         "file_name" : "level1",
         "init_pose" : [0,0],
         "final_pose" : [1,4],
-        "duration" : 20
+        "duration" : 50
+    },
+
+    "level2" : {
+        "disp_name" : "Level 2",
+        "file_name" : "level2",
+        "init_pose" : [0,0],
+        "final_pose" : [4,-6],
+        "duration" : 70
+    },
+
+    "level3" : {
+        "disp_name" : "Level 3",
+        "file_name" : "level3",
+        "init_pose" : [0,0],
+        "final_pose" : [5,5.5],
+        "duration" : 100
     }
 
 }
