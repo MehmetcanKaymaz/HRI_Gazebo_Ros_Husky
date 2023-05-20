@@ -76,7 +76,7 @@ class HuskyPositionListener:
 
 class Sim:
     def __init__(self,level=1):
-        print("SIM")
+        print("SIM", level)
         self.LevelParams=LoadLevelParams(level=level)
         
         self.control=SimpleControl()
@@ -85,7 +85,7 @@ class Sim:
         self.success=False
 
     def loop(self):
-        print("loopa girdim")
+        print("Loop started")
         statu=True
         t1=time.time()
         while statu:
@@ -132,6 +132,9 @@ class Sim:
         else:
             return False
 
-sim=Sim()
+
+level = rospy.get_param("__level")
+print("Level:", level)
+sim=Sim(level=level)
 sim.loop()
 

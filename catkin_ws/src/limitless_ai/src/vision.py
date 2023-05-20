@@ -9,7 +9,6 @@ import numpy as np
 from PIL import Image
 from torchvision import transforms
 from std_msgs.msg import Int32
-# from sensor_msgs.msg import Image
 
 class Vision_Model():
     """
@@ -72,11 +71,11 @@ class Vision_Model():
                     fontScale, color, thickness, cv2.LINE_AA)
         
         # Display the frame
-        cv2.imshow('frame', frame)
+        #cv2.imshow('frame', frame)
         
         # Exit if the 'q' key is pressed
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            return
+        #if cv2.waitKey(1) & 0xFF == ord('q'):
+        #    return
         
         self.queue.append(self.tahmin_label)
         if len(self.queue) > 10:
@@ -96,7 +95,7 @@ def start_vision_system():
         if len(son_tahminler) > 0:
             tahmin = statistics.mode(son_tahminler)
             pub1.publish(tahmin)
-            print("Tahmin:", tahmin)
+            #print("Tahmin:", tahmin)
         rate.sleep()
 
 if __name__ == '__main__':

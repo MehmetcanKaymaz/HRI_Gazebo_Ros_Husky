@@ -5,73 +5,119 @@ import sys
 import time
 import rospy
 import subprocess
+from std_msgs.msg import Int32
+from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
-from std_msgs.msg import Int32
-#from run_sim import Sim
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
-        if not MainWindow.objectName():
-            MainWindow.setObjectName(u"MainWindow")
-
-        MainWindow.resize(800, 600)
-        self.centralwidget = QWidget(MainWindow)
-        self.centralwidget.setObjectName(u"centralwidget")
-        self.gridLayoutWidget = QWidget(self.centralwidget)
-        self.gridLayoutWidget.setObjectName(u"gridLayoutWidget")
-        self.gridLayoutWidget.setGeometry(QRect(0, 0, 801, 601))
-        self.gridLayout = QGridLayout(self.gridLayoutWidget)
-        self.gridLayout.setObjectName(u"gridLayout")
-        self.gridLayout.setContentsMargins(0, 0, 0, 0)
-        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-        self.gridLayout.addItem(self.horizontalSpacer, 6, 2, 1, 1)
-        self.pushButtonPlay = QPushButton(self.gridLayoutWidget)
-        self.pushButtonPlay.setObjectName(u"pushButtonPlay")
-        self.gridLayout.addWidget(self.pushButtonPlay, 8, 4, 1, 1)
-        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-        self.gridLayout.addItem(self.horizontalSpacer_2, 6, 5, 1, 1)
-        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-        self.gridLayout.addItem(self.horizontalSpacer_4, 6, 0, 1, 1)
-        self.verticalSpacer_3 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
-        self.gridLayout.addItem(self.verticalSpacer_3, 7, 4, 1, 1)
-        self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
-        self.gridLayout.addItem(self.verticalSpacer_2, 2, 4, 1, 1)
-        self.radioButtonHard = QRadioButton(self.gridLayoutWidget)
-        self.radioButtonHard.setObjectName(u"radioButtonHard")
-        self.gridLayout.addWidget(self.radioButtonHard, 6, 6, 1, 1)
-        self.radioButtonMedium = QRadioButton(self.gridLayoutWidget)
-        self.radioButtonMedium.setObjectName(u"radioButtonMedium")
-        self.radioButtonMedium.setLayoutDirection(Qt.LeftToRight)
-        self.gridLayout.addWidget(self.radioButtonMedium, 6, 4, 1, 1)
-        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
-        self.gridLayout.addItem(self.verticalSpacer, 4, 4, 1, 1)
-        self.horizontalSpacer_3 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-        self.gridLayout.addItem(self.horizontalSpacer_3, 6, 7, 1, 1)
-        self.radioButtonEasy = QRadioButton(self.gridLayoutWidget)
-        self.radioButtonEasy.setObjectName(u"radioButtonEasy")
-        self.gridLayout.addWidget(self.radioButtonEasy, 6, 1, 1, 1)
-        self.labelGameName = QLabel(self.gridLayoutWidget)
-        self.labelGameName.setObjectName(u"labelGameName")
-        self.gridLayout.addWidget(self.labelGameName, 1, 4, 1, 1)
-        self.labelGameModes = QLabel(self.gridLayoutWidget)
-        self.labelGameModes.setObjectName(u"labelGameModes")
-        self.labelGameModes.setAlignment(Qt.AlignCenter)
-        self.gridLayout.addWidget(self.labelGameModes, 3, 4, 1, 1)
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.resize(1338, 838)
+        MainWindow.setAutoFillBackground(False)
+        MainWindow.setStyleSheet("background-color: white")
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setObjectName("centralwidget")
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setGeometry(QtCore.QRect(310, 30, 681, 131))
+        font = QtGui.QFont()
+        font.setPointSize(25)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label.setFont(font)
+        self.label.setAlignment(QtCore.Qt.AlignCenter)
+        self.label.setObjectName("label")
+        self.label_easy = QtWidgets.QLabel(self.centralwidget)
+        self.label_easy.setGeometry(QtCore.QRect(30, 210, 400, 120))
+        font = QtGui.QFont()
+        font.setPointSize(25)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_easy.setFont(font)
+        self.label_easy.setStyleSheet("background-color: lightgrey")
+        self.label_easy.setFrameShape(QtWidgets.QFrame.Box)
+        self.label_easy.setFrameShadow(QtWidgets.QFrame.Plain)
+        self.label_easy.setLineWidth(4)
+        self.label_easy.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_easy.setObjectName("label_easy")
+        self.label_medium = QtWidgets.QLabel(self.centralwidget)
+        self.label_medium.setGeometry(QtCore.QRect(450, 210, 400, 120))
+        font = QtGui.QFont()
+        font.setPointSize(25)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_medium.setFont(font)
+        self.label_medium.setStyleSheet("background-color: lightgreen")
+        self.label_medium.setFrameShape(QtWidgets.QFrame.Box)
+        self.label_medium.setFrameShadow(QtWidgets.QFrame.Plain)
+        self.label_medium.setLineWidth(4)
+        self.label_medium.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_medium.setObjectName("label_medium")
+        self.label_hard = QtWidgets.QLabel(self.centralwidget)
+        self.label_hard.setGeometry(QtCore.QRect(870, 210, 400, 120))
+        font = QtGui.QFont()
+        font.setPointSize(25)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_hard.setFont(font)
+        self.label_hard.setStyleSheet("background-color: lightgrey")
+        self.label_hard.setFrameShape(QtWidgets.QFrame.Box)
+        self.label_hard.setFrameShadow(QtWidgets.QFrame.Plain)
+        self.label_hard.setLineWidth(4)
+        self.label_hard.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_hard.setObjectName("label_hard")
+        self.label_play = QtWidgets.QLabel(self.centralwidget)
+        self.label_play.setGeometry(QtCore.QRect(450, 490, 400, 120))
+        font = QtGui.QFont()
+        font.setPointSize(25)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_play.setFont(font)
+        self.label_play.setStyleSheet("background-color: white")
+        self.label_play.setFrameShape(QtWidgets.QFrame.Box)
+        self.label_play.setFrameShadow(QtWidgets.QFrame.Plain)
+        self.label_play.setLineWidth(4)
+        self.label_play.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_play.setObjectName("label_play")
+        self.label_6 = QtWidgets.QLabel(self.centralwidget)
+        self.label_6.setGeometry(QtCore.QRect(470, 630, 371, 91))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(True)
+        font.setWeight(50)
+        self.label_6.setFont(font)
+        self.label_6.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_6.setObjectName("label_6")
+        self.label_7 = QtWidgets.QLabel(self.centralwidget)
+        self.label_7.setGeometry(QtCore.QRect(880, 410, 500, 500))
+        self.label_7.setText("")
+        self.label_7.setPixmap(QtGui.QPixmap("resources/husky.webp"))
+        self.label_7.setScaledContents(True)
+        self.label_7.setObjectName("label_7")
+        self.label_7.raise_()
+        self.label.raise_()
+        self.label_easy.raise_()
+        self.label_medium.raise_()
+        self.label_hard.raise_()
+        self.label_play.raise_()
+        self.label_6.raise_()
         MainWindow.setCentralWidget(self.centralwidget)
+
         self.retranslateUi(MainWindow)
-        QMetaObject.connectSlotsByName(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        self.label_6.hide()
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Limitless AI Game", None))
-        self.pushButtonPlay.setText(QCoreApplication.translate("MainWindow", u"Play", None))
-        self.radioButtonHard.setText(QCoreApplication.translate("MainWindow", u"Hard", None))
-        self.radioButtonMedium.setText(QCoreApplication.translate("MainWindow", u"Medium", None))
-        self.radioButtonEasy.setText(QCoreApplication.translate("MainWindow", u"Easy", None))
-        self.labelGameName.setText(QCoreApplication.translate("MainWindow", u"Limitless AI Game", None))
-        self.labelGameModes.setText(QCoreApplication.translate("MainWindow", u"Game Modes", None))
-
+        _translate = QtCore.QCoreApplication.translate
+        MainWindow.setWindowTitle(_translate("MainWindow", "Limitless AI Game"))
+        self.label.setText(_translate("MainWindow", "Limitless AI Game"))
+        self.label_easy.setText(_translate("MainWindow", "EASY"))
+        self.label_medium.setText(_translate("MainWindow", "MEDIUM"))
+        self.label_hard.setText(_translate("MainWindow", "HARD"))
+        self.label_play.setText(_translate("MainWindow", "PLAY"))
+        self.label_6.setText(_translate("MainWindow", "Starting game ..."))
 
 
 def start_game():
@@ -86,10 +132,10 @@ def start_game():
         return
 
     subprocess.run("rosnode kill /vision_system", shell=True)
-    time.sleep(10)
-
-    os.system("rosrun limitless_ai run_sim.py")
-    sys.exit(0)
+    time.sleep(1)
+    os.system(f"rosparam set __level {launch_mod}")
+    os.system("rosrun limitless_ai run_sim.py &")
+    QCoreApplication.exit(0)
 
 
 # UI Ayarlari
@@ -97,7 +143,6 @@ app = QApplication(sys.argv)
 MainWindow = QMainWindow()
 ui = Ui_MainWindow()
 ui.setupUi(MainWindow)
-ui.radioButtonMedium.setChecked(True)
 tahmin = 0
 launch_mod = 2
 
@@ -107,22 +152,30 @@ def callback(data):
     tahmin = data.data
     print("Tahmin:", tahmin)
 
-    if tahmin == 3:
-        if ui.radioButtonMedium.isChecked():
-            ui.radioButtonEasy.setChecked(True)
+    if tahmin == 3: # Go Left
+        if launch_mod == 2:
+            ui.label_medium.setStyleSheet("background-color:lightgrey")
+            ui.label_easy.setStyleSheet("background-color:lightgreen")
             launch_mod = 1
-        elif ui.radioButtonHard.isChecked():
-            ui.radioButtonMedium.setChecked(True)
+        elif launch_mod == 3:
+            ui.label_hard.setStyleSheet("background-color:lightgrey")
+            ui.label_medium.setStyleSheet("background-color:lightgreen")
             launch_mod = 2
     elif tahmin == 4:
-        if ui.radioButtonMedium.isChecked():
-            ui.radioButtonHard.setChecked(True)
+        if launch_mod == 2:
+            ui.label_medium.setStyleSheet("background-color:lightgrey")
+            ui.label_hard.setStyleSheet("background-color:lightgreen")
             launch_mod = 3
-        elif ui.radioButtonEasy.isChecked():
-            ui.radioButtonMedium.setChecked(True)
+        elif launch_mod == 1:
+            ui.label_easy.setStyleSheet("background-color:lightgrey")
+            ui.label_medium.setStyleSheet("background-color:lightgreen")
             launch_mod = 2
     elif tahmin == 2:
+        ui.label_play.setStyleSheet("background-color:lightblue")
+        ui.label_6.show()
+        time.sleep(3)
         start_game()
+        time.sleep(10)
 
 def start_ui_system():
     # ROS Ayarlari

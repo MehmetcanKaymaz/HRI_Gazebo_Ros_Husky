@@ -13,7 +13,7 @@ from torchvision import models, transforms
 import numpy as np
 from PIL import Image
 
-settings = termios.tcgetattr(sys.stdin)
+#settings = termios.tcgetattr(sys.stdin)
 
 class SimpleControl:
     def __init__(self):
@@ -51,7 +51,6 @@ class SimpleControl:
 
     def single_update(self):
         # Capture a frame from the webcam
-        print("frame okunuyor")
         ret, frame = self.cap.read()
 
         # Apply the data transformations to the frame
@@ -80,8 +79,23 @@ class SimpleControl:
         fontScale = 1
         color = (255, 0, 0)
         thickness = 2
-        cv2.putText(frame, 'Predicted Class: ' + str(label), org, font,
-                    fontScale, color, thickness, cv2.LINE_AA)
+        #cv2.putText(frame, 'Predicted Class: ' + str(label), org, font, fontScale, color, thickness, cv2.LINE_AA)
+        
+        if label == 1: # Up
+            arrow_begin = (100, 200)
+            arrow_end = (100, 100)
+        elif label == 2: # Down
+            arrow_begin = (100, 100)
+            arrow_end = (100, 200)
+        elif label == 3: # Left
+            arrow_begin = (200, 100)
+            arrow_end = (100, 100)
+        elif label == 4: # Right
+            arrow_begin = (100, 100)
+            arrow_end = (200, 100)
+
+        if label != 0:
+            frame = cv2.arrowedLine(frame, arrow_begin, arrow_end, (0, 0, 255), 5)
 
         # Display the frame
         cv2.imshow('frame', frame)
