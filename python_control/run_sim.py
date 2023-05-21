@@ -8,7 +8,7 @@ from gazebo_msgs.msg import ModelStates
 from geometry_msgs.msg import Pose
 import threading
 import time
-from dance import HuskyDancer
+from dance import HuskyDancer,HuskySadDancer
 #################################################################################################################################################
 class LoadLevelParams:
     def __init__(self,json_file="levels.json",level=1):
@@ -117,6 +117,10 @@ class Sim:
 
         if self.success:
             dancer=HuskyDancer(x=self.LevelParams.final_pose[0],y=self.LevelParams.final_pose[1])
+            dancer.dance()
+        else:
+            curr_pose=self.position_reader.get_pose()
+            dancer=HuskySadDancer(x=curr_pose[0],y=curr_pose[1])
             dancer.dance()
         
 

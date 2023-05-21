@@ -76,16 +76,45 @@ class SimpleControl:
 
         self.apply_control(label=label)
 
+        center_x = frame.shape[1] // 2
+        center_y = frame.shape[0] // 2
+
+        d1=120
+        d2=50
+        ofset=100
+            # Okun uç noktalarını belirleme
+        if label == 1:  # Yukarı
+            points = np.array([[center_x, center_y - d1-ofset],
+                            [center_x - d2, center_y-ofset],
+                            [center_x + d2, center_y-ofset]], np.int32)
+        elif label == 2:  # Aşağı
+            points = np.array([[center_x, center_y + d1+ofset],
+                            [center_x - d2, center_y+ofset],
+                            [center_x + d2, center_y+ofset]], np.int32)
+        elif label == 4:  # Sağa
+            points = np.array([[center_x + d1+ofset, center_y],
+                            [center_x+ofset, center_y - d2],
+                            [center_x+ofset, center_y + d2]], np.int32)
+        elif label == 3:  # Sola
+            points = np.array([[center_x - d1-ofset, center_y],
+                            [center_x-ofset, center_y - d2],
+                            [center_x-ofset, center_y + d2]], np.int32)
+
+
+        if label!=0:
+            cv2.fillPoly(frame, [points], (0, 0, 255))
+
         # Display the predicted class label on the frame
-        font = cv2.FONT_HERSHEY_SIMPLEX
+        """font = cv2.FONT_HERSHEY_SIMPLEX
         org = (50, 50)
         fontScale = 1
         color = (255, 0, 0)
         thickness = 2
         cv2.putText(frame, 'Predicted Class: ' + str(label), org, font,
-                    fontScale, color, thickness, cv2.LINE_AA)
+                    fontScale, color, thickness, cv2.LINE_AA)"""
 
         # Display the frame
+        frame=cv2.flip(frame, 1)
         cv2.imshow('frame', frame)
 
 

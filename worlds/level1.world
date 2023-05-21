@@ -896,10 +896,10 @@
       <static>1</static>
     </model>
     <state world_name='default'>
-      <sim_time>55 140000000</sim_time>
-      <real_time>43 136392319</real_time>
-      <wall_time>1683460349 503993435</wall_time>
-      <iterations>42528</iterations>
+      <sim_time>309 48000000</sim_time>
+      <real_time>256 672874246</real_time>
+      <wall_time>1684598566 489455481</wall_time>
+      <iterations>253908</iterations>
       <model name='ground_plane'>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <scale>1 1 1</scale>
@@ -911,37 +911,37 @@
         </link>
       </model>
       <model name='husky'>
-        <pose frame=''>6.1e-05 -2.1e-05 0.132273 6e-06 -0 -3.13318</pose>
+        <pose frame=''>-0.000689 -2.8e-05 0.132273 6e-06 -0 -3.13318</pose>
         <scale>1 1 1</scale>
         <link name='base_link'>
-          <pose frame=''>6.1e-05 -2.1e-05 0.132273 6e-06 -0 -3.13318</pose>
+          <pose frame=''>-0.000689 -2.8e-05 0.132273 6e-06 -0 -3.13318</pose>
           <velocity>-3e-06 -2e-06 4e-05 2.2e-05 -0 0</velocity>
-          <acceleration>-0 0 0 0 -0 0</acceleration>
-          <wrench>-0 0 0 0 -0 0</wrench>
+          <acceleration>-0 -0 -0 0 -0 0</acceleration>
+          <wrench>-0 -0 -0 0 -0 0</wrench>
         </link>
         <link name='front_left_wheel_link'>
-          <pose frame=''>-0.25353 -0.287564 0.165095 -1e-06 0.001186 -3.13318</pose>
-          <velocity>-3e-06 -3e-06 3.4e-05 1.8e-05 -1.7e-05 0</velocity>
-          <acceleration>-0 0 -0 0 -0 0</acceleration>
-          <wrench>-0 0 -0 0 -0 0</wrench>
+          <pose frame=''>-0.25428 -0.28757 0.165095 6e-06 0.005723 -3.13318</pose>
+          <velocity>-3e-06 -3e-06 3.4e-05 1.8e-05 -1.9e-05 0</velocity>
+          <acceleration>-0 -0 0 0 -0 0</acceleration>
+          <wrench>-0 -0 0 0 -0 0</wrench>
         </link>
         <link name='front_right_wheel_link'>
-          <pose frame=''>-0.25833 0.283216 0.165091 1.2e-05 0.001171 -3.13318</pose>
-          <velocity>-3e-06 -3e-06 4.6e-05 1.8e-05 -1.7e-05 0</velocity>
+          <pose frame=''>-0.25908 0.283209 0.165091 6e-06 0.005709 -3.13318</pose>
+          <velocity>-3e-06 -3e-06 4.6e-05 1.8e-05 -1.9e-05 0</velocity>
           <acceleration>-0 -0 0 0 -0 0</acceleration>
           <wrench>-0 -0 0 0 -0 0</wrench>
         </link>
         <link name='rear_left_wheel_link'>
-          <pose frame=''>0.258452 -0.283258 0.165095 0 0.001192 -3.13318</pose>
-          <velocity>-3e-06 -3e-06 3.4e-05 1.8e-05 -1.7e-05 0</velocity>
+          <pose frame=''>0.257702 -0.283265 0.165095 6e-06 0.005729 -3.13318</pose>
+          <velocity>-3e-06 -3e-06 3.4e-05 1.8e-05 -1.9e-05 0</velocity>
           <acceleration>-0 0 -0 0 -0 0</acceleration>
           <wrench>-0 0 -0 0 -0 0</wrench>
         </link>
         <link name='rear_right_wheel_link'>
-          <pose frame=''>0.253652 0.287521 0.165091 1.2e-05 0.001203 -3.13318</pose>
-          <velocity>-3e-06 -3e-06 4.6e-05 1.8e-05 -1.7e-05 0</velocity>
-          <acceleration>-0 -0 0 0 -0 0</acceleration>
-          <wrench>-0 -0 0 0 -0 0</wrench>
+          <pose frame=''>0.252902 0.287515 0.165091 6e-06 0.005742 -3.13318</pose>
+          <velocity>-3e-06 -3e-06 4.6e-05 1.8e-05 -1.9e-05 0</velocity>
+          <acceleration>-0 0 -0 0 -0 0</acceleration>
+          <wrench>-0 0 -0 0 -0 0</wrench>
         </link>
       </model>
       <model name='level1'>
@@ -996,7 +996,7 @@
     </state>
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose frame=''>0.662869 0.698206 5.31526 0 1.35564 3.09219</pose>
+        <pose frame=''>-0.091315 0.334265 15.2044 -0 1.37564 3.12819</pose>
         <view_controller>orbit</view_controller>
         <projection_type>perspective</projection_type>
       </camera>
